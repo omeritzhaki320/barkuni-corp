@@ -12,9 +12,10 @@ various Kubernetes and AWS EKS features. The application includes the following 
 
 Before you begin, ensure you have the following:
 
-- **AWS EKS Cluster**: A working EKS cluster where the application will be deployed.
-- **Helm**: The package manager for Kubernetes, used for managing the application's Helm chart.
-- **kubectl**: The command-line tool for interacting with the Kubernetes cluster.
+- **AWS EKS Cluster**
+- **Helm**
+- **kubectl**
+- **Docker**
 
 ## Installation
 
