@@ -1,0 +1,33 @@
+replicas: 2
+image:
+  account_id: "058264138725"
+  region: "us-east-1"
+  repository: "barkuni-corp"
+  tag: "latest"
+resources:
+  requests:
+    cpu: "200m"
+    memory: "256Mi"
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+service:
+  type: LoadBalancer
+  port: 80
+ingress:
+  enabled: true
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+  hosts:
+    - host: test.vicarius.xyz
+      paths:
+        - path: /
+          pathType: Prefix
+hpa:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  cpu:
+    targetAverageUtilization: 70

@@ -1,0 +1,16 @@
+{{- if .Values.hpa.enabled }}
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: server-scaledobject
+spec:
+  scaleTargetRef:
+    name: barkuni-corp
+  minReplicaCount: {{ .Values.hpa.minReplicas }}
+  maxReplicaCount: {{ .Values.hpa.maxReplicas }}
+  triggers:
+  - type: cpu
+    metadata:
+      type: Utilization
+      value: "{{ .Values.hpa.cpu.targetAverageUtilization }}"
+{{- end }}

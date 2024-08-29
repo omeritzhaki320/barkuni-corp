@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: barkuni-corp
+  labels:
+    app: barkuni-corp
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: barkuni-corp
+  template:
+    metadata:
+      labels:
+        app: barkuni-corp
+    spec:
+      containers:
+      - name: barkuni-corp
+        image: "{{ .Values.image.account_id }}.dkr.ecr.{{ .Values.image.region }}.amazonaws.com/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            cpu: "{{ .Values.resources.requests.cpu }}"
+            memory: "{{ .Values.resources.requests.memory }}"
+          limits:
+            cpu: "{{ .Values.resources.limits.cpu }}"
+            memory: "{{ .Values.resources.limits.memory }}"

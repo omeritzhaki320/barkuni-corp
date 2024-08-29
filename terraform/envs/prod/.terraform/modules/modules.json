@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"eks","Source":"../../modules/eks","Dir":"../../modules/eks"},{"Key":"security_group","Source":"../../modules/security_groups","Dir":"../../modules/security_groups"},{"Key":"vpc","Source":"../../modules/vpc","Dir":"../../modules/vpc"}]}
