@@ -7,7 +7,6 @@ various Kubernetes and AWS EKS features. The application includes the following 
 
 - **Welcome Page**: Accessible via a custom domain using NGINX Ingress Controller.
 - **API Endpoint**: Lists all running pods in the `kube-system` namespace.
-- **Horizontal Pod Autoscaling (HPA)**: Scales the application based on CPU usage, leveraging KEDA for autoscaling.
 
 ## Prerequisites
 
