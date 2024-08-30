@@ -54,11 +54,11 @@ resource "aws_subnet" "private" {
 }
 
 resource "aws_nat_gateway" "ng" {
-  allocation_id = aws_eip.this.id
+  allocation_id = aws_eip.eip.id
   subnet_id     = aws_subnet.public.id
 }
 
-resource "aws_eip" "this" {
+resource "aws_eip" "eip" {
   vpc = true
 }
 
