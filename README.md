@@ -7,15 +7,15 @@ various Kubernetes and AWS EKS features. The application includes the following 
 
 - **Welcome Page**: Accessible via a custom domain using NGINX Ingress Controller.
 - **API Endpoint**: Lists all running pods in the `kube-system` namespace.
-- **Horizontal Pod Autoscaling (HPA)**: Scales the application based on CPU usage, leveraging KEDA for autoscaling.
 
 ## Prerequisites
 
 Before you begin, ensure you have the following:
 
-- **AWS EKS Cluster**: A working EKS cluster where the application will be deployed.
-- **Helm**: The package manager for Kubernetes, used for managing the application's Helm chart.
-- **kubectl**: The command-line tool for interacting with the Kubernetes cluster.
+- **AWS EKS Cluster**
+- **Helm**
+- **kubectl**
+- **Docker**
 
 ## Installation
 
