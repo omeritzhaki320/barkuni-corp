@@ -1,7 +1,7 @@
 output "cluster_name" {
-  value = aws_eks_cluster.this.name
+  value = aws_eks_cluster.eks_cluster.name
 }
 
 output "kubeconfig" {
-  value = aws_eks_cluster.this.endpoint
+  value = aws_eks_cluster.eks_cluster.endpoint
 }

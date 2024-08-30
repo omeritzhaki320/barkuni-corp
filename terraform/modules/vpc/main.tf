@@ -1,4 +1,4 @@
-resource "aws_vpc" "this" {
+resource "aws_vpc" "vpc" {
   cidr_block = var.vpc_cidr
 
   tags = {
@@ -7,7 +7,7 @@ resource "aws_vpc" "this" {
 }
 
 resource "aws_internet_gateway" "this" {
-  vpc_id = aws_vpc.this.id
+  vpc_id = aws_vpc.vpc.id
 
   tags = {
     Name = "${var.name}-igw"
@@ -15,7 +15,7 @@ resource "aws_internet_gateway" "this" {
 }
 
 resource "aws_route_table" "public" {
-  vpc_id = aws_vpc.this.id
+  vpc_id = aws_vpc.vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -28,7 +28,7 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_subnet" "public" {
-  vpc_id            = aws_vpc.this.id
+  vpc_id            = aws_vpc.vpc.id
   cidr_block        = var.public_subnet_cidr
   availability_zone = element(var.availability_zones, 0)
   map_public_ip_on_launch = true
@@ -44,7 +44,7 @@ resource "aws_route_table_association" "public" {
 }
 
 resource "aws_subnet" "private" {
-  vpc_id            = aws_vpc.this.id
+  vpc_id            = aws_vpc.vpc.id
   cidr_block        = var.private_subnet_cidr
   availability_zone = element(var.availability_zones, 1)
 
@@ -53,7 +53,7 @@ resource "aws_subnet" "private" {
   }
 }
 
-resource "aws_nat_gateway" "this" {
+resource "aws_nat_gateway" "ng" {
   allocation_id = aws_eip.this.id
   subnet_id     = aws_subnet.public.id
 }
@@ -63,11 +63,11 @@ resource "aws_eip" "this" {
 }
 
 resource "aws_route_table" "private" {
-  vpc_id = aws_vpc.this.id
+  vpc_id = aws_vpc.vpc.id
 
   route {
     cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.this.id
+    nat_gateway_id = aws_nat_gateway.ng.id
   }
 
   tags = {

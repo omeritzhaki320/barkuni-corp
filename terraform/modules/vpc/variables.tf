@@ -1,11 +1,24 @@
-output "vpc_id" {
-  value = aws_vpc.this.id
+variable "vpc_cidr" {
+  type        = string
+  description = "CIDR block for the VPC"
 }
 
-output "public_subnet_id" {
-  value = aws_subnet.public.id
+variable "public_subnet_cidr" {
+  type        = string
+  description = "CIDR block for the public subnet"
 }
 
-output "private_subnet_id" {
-  value = aws_subnet.private.id
+variable "private_subnet_cidr" {
+  type        = string
+  description = "CIDR block for the private subnet"
+}
+
+variable "availability_zones" {
+  type = list(string)
+  description = "List of availability zones"
+}
+
+variable "name" {
+  type        = string
+  description = "Name tag for the VPC and subnets"
 }

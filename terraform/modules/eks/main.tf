@@ -1,4 +1,4 @@
-resource "aws_eks_cluster" "this" {
+resource "aws_eks_cluster" "eks_cluster" {
   name     = var.cluster_name
   role_arn = var.cluster_role_arn
 
@@ -12,7 +12,7 @@ resource "aws_eks_cluster" "this" {
   depends_on = [aws_iam_role_policy_attachment.eks_cluster_policy]
 }
 
-resource "aws_iam_role" "eks_cluster" {
+resource "aws_iam_role" "eks_cluster_role" {
   name = "${var.cluster_name}-eks-cluster"
 
   assume_role_policy = <<EOF
@@ -34,11 +34,11 @@ EOF
 
 resource "aws_iam_role_policy_attachment" "eks_cluster_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
-  role       = aws_iam_role.eks_cluster.name
+  role       = aws_iam_role.eks_cluster_role.name
 }
 
 resource "aws_eks_node_group" "default" {
-  cluster_name    = aws_eks_cluster.this.name
+  cluster_name    = aws_eks_cluster.eks_cluster.name
   node_group_name = "default"
   node_role_arn   = var.node_role_arn
   subnet_ids      = var.subnet_ids
